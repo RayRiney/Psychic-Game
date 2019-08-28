@@ -13,7 +13,17 @@ function checkUserGuess()
     
 
 } 
-    
+   
+
+if("user-guess")< "mother"
+
+    else()
+
+    else()
+
+    else()
+
+
 
 
         function display() {}
