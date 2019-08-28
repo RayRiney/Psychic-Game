@@ -1,0 +1,17 @@
+
+
+
+h1, h2, h3  {
+    text-shadow: 0 0 3px  rgb(51, 50, 50);
+    font-family:'Acme', sans-serif;
+}
+
+
+body{
+    background-color: gray;
+}
+
+
+
+
+
