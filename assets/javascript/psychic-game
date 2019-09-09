@@ -1,0 +1,108 @@
+var guess = {
+    /* [ALL THE PLAYERS] */
+    form : null, // holds the form itself
+    field : null, // holds the number input field
+    min : 0, // min allowed number
+    max : 0, // max allowed number
+    button : null, // holds the submit button
+    txt : null, // holds the response text field
+    jackpot : 0, // the correct number
+    guesses : 0, // total nunmber of guesses made
+  
+    /* [CHECK GIVEN NUMBER] */
+    check : function (evt) {
+      // Hit or miss?
+      var num = parseInt(guess.field.value);
+      guess.guesses++;
+      guess.txt.classList.remove("high");
+      guess.txt.classList.remove("low");
+  
+      // Hit - Update interface
+      if (num==guess.jackpot) {
+        guess.txt.innerHTML = "Nailed it! Total guesses made - " + guess.guesses;
+        guess.txt.classList.add("hit");
+        guess.field.readOnly = true;
+        guess.button.value = "Reset";
+        guess.form.removeEventListener("submit", guess.check);
+        guess.form.addEventListener("submit", guess.reset);
+      }
+  
+      // Miss - Give some hints
+      else  {
+        var difference = num - guess.jackpot,
+            text = "";
+  
+        // High or low?
+        if (difference>0) {
+          text = "high";
+          guess.txt.classList.add("high");
+        } else {
+          text = "low";
+          guess.txt.classList.add("low");
+        }
+  
+        // Too much or close?
+        difference = Math.abs(difference);
+        if (difference>20) {
+          text = "Too " + text;
+        } else if (difference>=10) {
+          text = "Slightly " + text;
+        } else {
+          text = "A little " + text;
+        }
+  
+        // Interface update
+        guess.txt.innerHTML = text;
+      }
+  
+      // Stop the form from submitting
+      evt.preventDefault();
+      evt.stopPropagation();
+      return false;
+    },
+  
+    /* [RESET THE GAME] */
+    reset : function (evt) {
+      guess.guesses = 0;
+      guess.txt.innerHTML = "";
+      guess.txt.classList.remove("hit");
+      guess.field.readOnly = false;
+      guess.field.value = 0;
+      guess.button.value = "Make a Guess";
+      guess.form.removeEventListener("submit", guess.reset);
+      guess.form.addEventListener("submit", guess.check);
+  
+      // Generate the random jackpot number
+      // Credits to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+      guess.jackpot = Math.floor(Math.random() * (guess.max - guess.min + 1)) + guess.min;
+  
+      // For the cheaters
+      console.log("Jackpot - " + guess.jackpot);
+  
+      // Stop the form from submitting
+      evt.preventDefault();
+      evt.stopPropagation();
+      return false;
+    }
+  };
+  
+  /* [INIT] */
+  window.addEventListener("load", function(){
+    // Get the HTML elements
+    guess.form = document.getElementById("guess-form");
+    guess.field = document.getElementById("guess-num");
+    guess.min = Math.ceil(guess.field.min);
+    guess.max = Math.floor(guess.field.max);
+    guess.button = document.getElementById("guess-btn");
+    guess.txt = document.getElementById("guess-txt");
+  
+    // Attach on submit event
+    guess.form.addEventListener("submit", guess.check);
+  
+    // Generate the random jackpot number
+    // Credits to https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+    guess.jackpot = Math.floor(Math.random() * (guess.max - guess.min + 1)) + guess.min;
+  
+    // For the cheaters
+    console.log("Jackpot - " + guess.jackpot);
+  });

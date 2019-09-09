@@ -1,37 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
+<DOCTYPE html>
+<html>
+  <head>
+    <title>
+     
+    </title>
+    <link href="style.css" rel="stylesheet">
+   
+  </head>
+  <body>
+      
 
-<head>
-
-    <script type="text/javascript" src="./assets/javascript/game.js"></script>
-    <link rel="stylesheet" type="text/css" href="./assets/css/style.css">
-    <link href="https://fonts.googleapis.com/css?family=Acme&display=swap" rel="stylesheet">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Psycho Psychic Game</title>
-
-
-    <style>
-        img {
-            width: 80%;
-            height: auto;
-            margin: 10%;
-        }
-
-        </style>
-        </head>
-        <body>
-      <img id="display-image" src = "./assets/images/pgame.gif" width = "500"height = "400">
-        <h1 id="display-message">Mother wants to play !</h1>
-        <h2>Mother wants you to guess a number that I'm, I mean she's,thinking between 1 and 20</h2>
-        
-        
-        <form id="user-guess"action="javascript:void(0);">
-            <input type="text"placeholder="Enter your guess">
-            <input type="button"value="Submit Guess"onclick="checkUserserGuess();">
-            <input type="button"value="New Game"onclick="location.reload();">
-        </form>
-        <script src="./assets/javascript/game.js"></script>
-    </body>
-    </html>
+      
+      <h1>Mother wants to play!</h1>
+      <h2>I'm thinking of a number between 1-100, what is it?</h2>
+          <img src = "assets/images/pgame.gif" style = "width:500px; height:350px; border-radius: 5px; ">
+      <form id = 'guess-form' >
+      <input id="guess-num" type="number"  placeholder="Enter your guess">
+      <input id="guess-btn"  type="submit" value="Make a Guess"/>
+      <div id="guess-txt"></div>
+    </form>
+    <script src="java.js"></script>
+ 
+  </body>
+</html>
